@@ -1,0 +1,255 @@
+{
+  "info": {
+    "name": "Fans CRM API",
+    "description": "API collection for fans-crm.com backend test",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:3000/api/v1",
+      "type": "string"
+    },
+    {
+      "key": "token",
+      "value": "",
+      "type": "string"
+    }
+  ],
+  "item": [
+    {
+      "name": "Authentication",
+      "item": [
+        {
+          "name": "Login - Get JWT Token",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "if (pm.response.code === 201 || pm.response.code === 200) {",
+                  "    const jsonData = pm.response.json();",
+                  "    pm.collectionVariables.set(\"token\", jsonData.access_token);",
+                  "    console.log(\"Token saved:\", jsonData.access_token);",
+                  "}"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"username\": \"test-user\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/auth/login",
+              "host": ["{{baseUrl}}"],
+              "path": ["auth", "login"]
+            },
+            "description": "Get JWT token for authentication. The token will be automatically saved to collection variable 'token'."
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Users",
+      "item": [
+        {
+          "name": "Add User",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"John Doe\",\n  \"email\": \"john.doe@example.com\",\n  \"phone\": \"+1234567890\",\n  \"dateOfBirth\": \"1990-01-01\"\n}"
+            },
+            "url": {
+              "raw": "{{baseUrl}}/users/add-user",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "add-user"]
+            },
+            "description": "Add a new user. The request data will be logged to console on the server."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Users (Paginated)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/get-users?page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "get-users"],
+              "query": [
+                {
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number (starts at 1)"
+                },
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Items per page"
+                }
+              ]
+            },
+            "description": "Get users with pagination. Returns paginated list of users."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Users (Filter by Name)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/get-users?name=John&page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "get-users"],
+              "query": [
+                {
+                  "key": "name",
+                  "value": "John",
+                  "description": "Filter by name (case-insensitive partial match)"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get users filtered by name. You can also filter by email or phone."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Users (Filter by Email)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/get-users?email=example&page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "get-users"],
+              "query": [
+                {
+                  "key": "email",
+                  "value": "example",
+                  "description": "Filter by email (case-insensitive partial match)"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get users filtered by email."
+          },
+          "response": []
+        },
+        {
+          "name": "Get Users (Filter by Phone)",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/get-users?phone=123&page=1&limit=10",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "get-users"],
+              "query": [
+                {
+                  "key": "phone",
+                  "value": "123",
+                  "description": "Filter by phone (case-insensitive partial match)"
+                },
+                {
+                  "key": "page",
+                  "value": "1"
+                },
+                {
+                  "key": "limit",
+                  "value": "10"
+                }
+              ]
+            },
+            "description": "Get users filtered by phone."
+          },
+          "response": []
+        },
+        {
+          "name": "Get User by ID",
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Authorization",
+                "value": "Bearer {{token}}"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/users/get-user/:id",
+              "host": ["{{baseUrl}}"],
+              "path": ["users", "get-user", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "YOUR_USER_ID_HERE",
+                  "description": "User ID from MongoDB"
+                }
+              ]
+            },
+            "description": "Get a single user by their ID. Replace :id with actual user ID."
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}

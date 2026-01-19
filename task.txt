@@ -1,0 +1,30 @@
+Testove zavdannya dlya Back-end Developer fans-crm.com Pered vykonannyam zavdannya slid rozumity, shcho ne obovʺyazkovo vykonuvaty vsyu zadachu povnistyu. Dostatnʹo pobuduvaty osnovu dodatku ta opysaty vsi komponenty i metody. Krim toho, vy povynni buty hotovi poyasnyty pid chas tekhnichnoho intervʺyu, yak vin pratsyuye. Zavdannya: Kod maye buty dostupnyy na GitHub dlya perevirky. Pobuduyte prostyy servernyy dodatok vidpovidno do vymoh: freymvork: NestJS Node.js versiya: v22+ baza danykh: MongoDB ORM: Mongoose Dodatok maye buty prostym REST API: vidpravka danykh cherez POST-zapyt, zberezhennya u bazi danykh ta vyvid u konsolʹ yak lohiv otrymannya danykh cherez GET-zapyt Vykorystovuyte nastupni adresy: /api/v1/add-user /api/v1/get-users/ (maye buty pahinatsiya ta optsionalʹnyy filʹtr za imʺyam korystuvacha, email abo telefonom) /api/v1/get-user/:id Neobkhidno heneruvaty vypadkovi dani korystuvachiv (imʺya, email, telefon). Takozh slid orhanizuvaty avtoryzatsiyu zapytiv za dopomohoyu JWT tokena v HTTP-zaholovku. Na starti, yakshcho baza danykh porozhnya, bekend maye stvoryty 2 milʹyony vypadkovykh zapysiv korystuvachiv (imʺya, email, telefon, data narodzhennya), a zapyty mayutʹ pratsyuvaty z tsymy danymy. Bonusne zavdannya (dlya tykh, khto pretenduye na full-stack): Stvoryty prostyy desktopnyy dodatok z takymy vymohamy: freymvork: Electron Node.js versiya: v22+ TypeScript Dodatok maye buty prostym frontend-kliyentom na ReactJS, z mozhlyvistyu peremykannya mizh dvoma storinkamy za posylannyamy. Odna z tsykh storinok povynna otrymuvaty ta vidpravlyaty dani na vash bekend. Napryklad, zberezhennya ta otrymannya danykh korystuvachiv. Vidpravlyaty v Telegram — @alexius_recruiter abo @t_recruiter999, razom z rezyume ta zarplatnymy ochikuvannyamy. Budʹ laska, ne vykorystovuyte SHI — tse pomitno :(
+1,740
+Test task for Back-end Developer fans-crm.com
+Before completing the task, you should understand that it is not necessary to complete the entire task in full. It is enough to build the basis of the application and describe all components and methods.
+In addition, you should be ready to explain during a technical interview how it works.
+Task:
+The code must be available on GitHub for review. Build a simple server application according to the requirements:
+Framework: NestJS
+Node.js version: v22+
+Database: MongoDB
+ORM: Mongoose
+
+The application should be a simple REST API:
+Sending data via POST request, saving to database and output to console as logs
+Receiving data via GET request
+
+Use the following addresses:
+/api/v1/add-user
+/api/v1/get-users/ (must have pagination and optional filter by username, email or phone)
+/api/v1/get-user/:id
+
+You need to generate random user data (name, email, phone). You should also organize authorization of requests using JWT token in HTTP header.
+At the start, if the database is empty, the backend should create 2 million random user records (name, email, phone, date of birth), and queries should work with this data.
+Bonus task (for those who apply for full-stack):
+Create a simple desktop application with the following requirements:
+Framework: Electron
+Node.js version: v22+
+TypeScript
+
+The application should be a simple frontend client on ReactJS, with the ability to switch between two pages via links. One of these pages should receive and send data to your backend. For example, save and retrieve user data.
